@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.qrdsn.fullstackbackend.model.User;
 import com.qrdsn.fullstackbackend.model.dto.UserDTO;
 import com.qrdsn.fullstackbackend.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,7 +27,7 @@ public class UserControllerTest {
     @InjectMocks
     UserController userController;
 
-    @Mock
+    @MockBean
     UserService userService;
 
     List<UserDTO> userDTOList = new ArrayList<UserDTO>();

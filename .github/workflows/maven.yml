@@ -30,3 +30,6 @@ jobs:
     - name: Build with Maven
       working-directory: fullstack-backend
       run: mvn -B test --file pom.xml
+
+    - name: SonarQube Scanner
+      uses: ItsEcholot/sonarqube-action@v0.0.2

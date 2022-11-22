@@ -20,7 +20,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration(locations = "/test-context.xml")
 class ProductControllerTest {
     @InjectMocks
     ProductController productController;

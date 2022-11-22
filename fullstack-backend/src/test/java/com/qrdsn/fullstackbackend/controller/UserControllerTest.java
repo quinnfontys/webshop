@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration(locations = "/test-context.xml")
 public class UserControllerTest {
     @InjectMocks
     UserController userController;

@@ -1,16 +1,22 @@
 import './App.css';
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import Navbar from "./layout/Navbar";
-import productDisplay from "./overview/productDisplay";
+import Home from "./layout/Home";
+import Sidebar from "./layout/Sidebar";
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-
-      <p> {Math.random() }</p>
-
-      <productDisplay/>
+      <header className="header">
+        <Navbar/>
+      </header>
+      <div className="content">
+        <Home/>
+      </div>
+      <aside className="sidebar">
+        <Sidebar/>
+      </aside>
     </div>
   );
 }

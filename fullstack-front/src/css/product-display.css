@@ -1,0 +1,29 @@
+.home {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, 1fr); */
+    /* grid-auto-columns: minmax(0, 384px); */
+
+    grid-auto-columns: minmax(0, 1fr); 
+    /* grid-auto-flow: column; */
+
+    grid-template-columns: repeat(auto-fill, minmax(0px, 230px));
+    justify-content: center;
+
+    padding: 20px 10px;
+    gap: 10px 20px;
+}
+
+
+.product-preview {
+    text-align: left;
+}
+  
+.product-preview:hover {
+    box-shadow: 1px 3px rgba(0,0,0,0.1);
+}
+  
+.product-preview h2 {
+    font-size: 20px;
+    color: #0b0f859b;
+    margin-bottom: 8px;
+}

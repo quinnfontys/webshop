@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     //  Get all categories
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<CategoryDTO>> findAll(){
         List<CategoryDTO> categoryViewModelList = inventoryService.findAllCategories();
         if (categoryViewModelList != null ) {
@@ -37,8 +37,8 @@ public class CategoryController {
 
 
     //  Get category information with id
-    @GetMapping("{id}")
-    public ResponseEntity<CategoryDTO> getById(@PathVariable Long id){
+    @GetMapping
+    public ResponseEntity<CategoryDTO> getById(@RequestParam Long id){
         return ResponseEntity.ok(inventoryService.findCategory(id));
     }
 
@@ -49,8 +49,8 @@ public class CategoryController {
     }
 
     //  Delete the category with id
-    @DeleteMapping("{id}")
-    public ResponseEntity<CategoryDTO> delete(@PathVariable Long id){
+    @DeleteMapping
+    public ResponseEntity<CategoryDTO> delete(@RequestParam Long id){
         return ResponseEntity.status(HttpStatus.OK).body(inventoryService.deleteCategory(id));
     }
 }

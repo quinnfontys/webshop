@@ -26,7 +26,7 @@ public class ProductController {
     }
 
     //  Get all products
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<ProductDTO>> findAll(){
         List<ProductDTO> productViewModelList = inventoryService.findAllProducts();
         if (productViewModelList != null ) {
@@ -45,10 +45,24 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
+//    @GetMapping("/all")
+//    public ResponseEntity<List<ProductDTO>> findAll(@Nullable @RequestParam Long categoryId){
+//        List<ProductDTO> productViewModelList;
+//        if (categoryId == null) {
+//            productViewModelList = inventoryService.findAllProducts();
+//        } else {
+//            productViewModelList = inventoryService.findAllProductsByCategoryId(categoryId);
+//        }
+//        if (productViewModelList != null ) {
+//            return ResponseEntity.ok(productViewModelList);
+//        }
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//    }
+
 
     //  Get product information with id
-    @GetMapping("{id}")
-    public ResponseEntity<ProductDTO> getById(@PathVariable Long id){
+    @GetMapping
+    public ResponseEntity<ProductDTO> getById(@RequestParam Long id){
         return ResponseEntity.ok(inventoryService.findProduct(id));
     }
 
@@ -59,8 +73,8 @@ public class ProductController {
     }
 
     //  Delete the product with id
-    @DeleteMapping("{id}")
-    public ResponseEntity<ProductDTO> delete(@PathVariable Long id){
+    @DeleteMapping
+    public ResponseEntity<ProductDTO> delete(@RequestParam Long id){
         return ResponseEntity.status(HttpStatus.OK).body(inventoryService.deleteProduct(id));
     }
 }

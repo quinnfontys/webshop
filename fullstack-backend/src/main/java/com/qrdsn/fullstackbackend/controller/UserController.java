@@ -43,8 +43,8 @@ public class UserController {
 
 
     //  Get user information with id
-    @GetMapping("{id}")
-    public ResponseEntity<UserDTO> getById(@PathVariable Long id){
+    @GetMapping("/all")
+    public ResponseEntity<UserDTO> getById(@RequestParam Long id){
         return ResponseEntity.ok(userService.findById(id));
     }
 
@@ -55,8 +55,8 @@ public class UserController {
     }
 
     //  Delete the user with id
-    @DeleteMapping("{id}")
-    public ResponseEntity<UserDTO> delete(@PathVariable Long id){
+    @DeleteMapping
+    public ResponseEntity<UserDTO> delete(@RequestParam Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.delete(id));
     }
 
@@ -65,7 +65,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.register(registerDTO));
     }
 
-    @GetMapping("/verify")
+    @PostMapping("/verify")
     public ResponseEntity<UserDTO> changePassword(@RequestParam Long id, @RequestParam String token) {
         return ResponseEntity.status(HttpStatus.OK).body(authenticationService.verify(token, id));
     }
@@ -75,7 +75,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(authenticationService.changePassword(userDTO));
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(authenticationService.login(loginDTO));
     }

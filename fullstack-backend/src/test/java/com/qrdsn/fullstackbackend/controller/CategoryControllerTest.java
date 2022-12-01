@@ -1,6 +1,7 @@
 package com.qrdsn.fullstackbackend.controller;
 
 import com.qrdsn.fullstackbackend.model.dto.CategoryDTO;
+import com.qrdsn.fullstackbackend.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +24,7 @@ class CategoryControllerTest {
     @InjectMocks
     CategoryController categoryController;
     @Mock
-    CategoryService categoryService;
+    InventoryService inventoryService;
 
     List<CategoryDTO> categoryDTOList = new ArrayList<CategoryDTO>();
     @BeforeEach

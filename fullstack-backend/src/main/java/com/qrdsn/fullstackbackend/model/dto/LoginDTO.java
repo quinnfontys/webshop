@@ -9,7 +9,7 @@ public class LoginDTO extends DTO {
     public String email;
     public String password;
 
-    LoginDTO(String email, String password){
+    public LoginDTO(String email, String password){
         this.email = email;
         this.password = password;
     }

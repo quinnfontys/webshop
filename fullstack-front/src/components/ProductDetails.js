@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 
 const ProductDetails = () => {
     const { id } = useParams();
-    const { data: product, loading, error } = useFetch(url.product + "/" + id)
+    const { data: product, loading, error } = useFetch(url.product + "/", {id: id})
 
     console.log(product);
     if (loading) return (<h3>Loading...</h3>);

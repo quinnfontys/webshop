@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
     const id = 2;
 
-    const { data, loading, error } = useFetch(url.cart + "/" + id);
+    const { data, loading, error } = useFetch(url.cart, {"userId" : id});
 
     if (loading) return (<h3>Loading...</h3>);
     if (error != null) return (<h3>{error}</h3>);

@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import AllProducts from "./AllProducts";
-import ProductCategory from "./ProductCategory";
 import Sidebar from "./Sidebar";
 import ProductDetails from "./ProductDetails";
 import NotFound from "./NotFound";
 import "../css/home.css";
+import ProductCategory from "./ProductCategory";
 
 const Home = () => {
     return (

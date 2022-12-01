@@ -3,7 +3,7 @@ import url from "../api/url";
 import useFetch from "../hooks/useFetch";
 
 const Sidebar = () => {
-    const { data, loading, error } = useFetch(url.category)
+    const { data, loading, error } = useFetch(url.category + "/all")
 
     if (loading) return (<h3>Loading...</h3>);
     if (error != null) return (<h3>{error}</h3>);

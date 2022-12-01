@@ -33,8 +33,8 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.OK).body(cartService.removeProductFromCart(cartProductDTO));
     }
 
-    @GetMapping("{userId}")
-    public ResponseEntity<CartDTO> findCartFromUser(@PathVariable Long userId) {
+    @GetMapping
+    public ResponseEntity<CartDTO> findCartFromUser(@RequestParam Long userId) {
         return ResponseEntity.status(HttpStatus.OK).body(cartService.findCartFromUser(userId));
     }
 }

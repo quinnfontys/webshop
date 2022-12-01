@@ -47,7 +47,7 @@ class ProductControllerTest {
         product.setId(1L);
         product.setName("Cavendish");
 
-        when(inventoryService.create(any(ProductDTO.class))).thenReturn(product);
+        when(inventoryService.createProduct(any(ProductDTO.class))).thenReturn(product);
 
         ResponseEntity<ProductDTO> result = productController.create(product);
 
@@ -57,7 +57,7 @@ class ProductControllerTest {
 
     @Test
     void findAll() {
-        when(inventoryService.findAll()).thenReturn(productDTOList);
+        when(inventoryService.findAllProducts()).thenReturn(productDTOList);
 
         ResponseEntity<List<ProductDTO>> result = productController.findAll();
 
@@ -69,7 +69,7 @@ class ProductControllerTest {
 
     @Test
     void getById() {
-        when(inventoryService.findById(any(Long.class))).thenReturn(productDTOList.get(0));
+        when(inventoryService.findProduct(any(Long.class))).thenReturn(productDTOList.get(0));
 
         ResponseEntity<ProductDTO> result = productController.getById(1L);
 
@@ -84,7 +84,7 @@ class ProductControllerTest {
         product.setId(1L);
         product.setName("Cavendish");
 
-        when(inventoryService.update(any(ProductDTO.class))).thenReturn(product);
+        when(inventoryService.updateProduct(any(ProductDTO.class))).thenReturn(product);
 
         ResponseEntity<ProductDTO> result = productController.update(product);
 
@@ -94,7 +94,7 @@ class ProductControllerTest {
 
     @Test
     void delete() {
-        when(inventoryService.delete(any(Long.class))).thenReturn(productDTOList.get(0));
+        when(inventoryService.deleteProduct(any(Long.class))).thenReturn(productDTOList.get(0));
 
         ResponseEntity<ProductDTO> result = productController.delete(1L);
 

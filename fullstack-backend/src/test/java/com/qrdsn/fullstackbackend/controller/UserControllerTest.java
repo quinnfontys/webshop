@@ -93,7 +93,7 @@ public class UserControllerTest {
         ResponseEntity<UserDTO> result = userController.update(user);
 
         assertThat(result.getStatusCodeValue()).isEqualTo(200);
-        assertThat(result.getBody()).isEqualTo(user);
+        assertThat(result.getBody().getEmail()).isEqualTo(user.getEmail());
     }
 
     @Test

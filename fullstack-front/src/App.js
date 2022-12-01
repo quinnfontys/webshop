@@ -1,23 +1,26 @@
-import './App.css';
+import { Routes, Route } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
-import Navbar from "./layout/Navbar";
-import Home from "./layout/Home";
-import Sidebar from "./layout/Sidebar";
+import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Cart from "./components/Cart";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="header">
-        <Navbar/>
-      </header>
-      <div className="content">
-        <Home/>
+      <div className="App">
+        <div className="header">
+          <Navbar />
+        </div>
+        <Routes>
+          <Route path="*" element={<Home/>}/>
+          <Route path="/cart" element={<Cart/>}></Route>
+          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/register" element={<Register/>}></Route>
+        </Routes>
       </div>
-      <aside className="sidebar">
-        <Sidebar/>
-      </aside>
-    </div>
   );
 }
 

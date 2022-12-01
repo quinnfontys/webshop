@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class CategoryNotFoundAdvice {
+public class InvalidInputAdvice {
     @ResponseBody
-    @ExceptionHandler(CategoryNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(CategoryNotFoundException exception){
+    @ExceptionHandler(InvalidInputException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String invalidInputHandler(InvalidInputException exception){
         return exception.getMessage();
     }
 }

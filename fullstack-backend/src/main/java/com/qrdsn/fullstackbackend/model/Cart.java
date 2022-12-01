@@ -11,18 +11,13 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Product {
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private Category category;
-    private String name;
-    @Column(columnDefinition = "TEXT")
-    private String description;
-    private String image_file;
-    private Float price;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToOne
+    private User user;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private Set<CartProduct> cartProducts;
+
 }

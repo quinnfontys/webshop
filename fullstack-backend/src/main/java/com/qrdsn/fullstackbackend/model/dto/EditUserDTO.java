@@ -5,6 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegisterDTO extends DTO {
+public class EditUserDTO extends DTO {
+    private Long id;
     private String email;
+    private String password;
+    private Byte role;
 }

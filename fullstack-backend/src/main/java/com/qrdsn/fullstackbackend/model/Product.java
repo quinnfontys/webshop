@@ -4,9 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -14,14 +13,16 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    private Category category;
     private String name;
-    private Long categoryId;
+    @Column(columnDefinition = "TEXT")
+    private String description;
+    private String image_file;
+    private Float price;
 
-
-    public Product(Long id, String name){
-        this.id = id;
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<CartProduct> cartProducts;
 }

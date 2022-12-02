@@ -8,5 +8,8 @@ import lombok.Setter;
 public class ProductDTO extends DTO {
     private Long id;
     private String name;
-    private Long categoryId;
+    private CategoryDTO category;
+    private String description;
+    private String image_file;
+    private Float price;
 }

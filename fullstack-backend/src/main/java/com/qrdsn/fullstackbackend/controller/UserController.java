@@ -1,6 +1,10 @@
 package com.qrdsn.fullstackbackend.controller;
 
+import com.qrdsn.fullstackbackend.model.dto.EditUserDTO;
+import com.qrdsn.fullstackbackend.model.dto.LoginDTO;
+import com.qrdsn.fullstackbackend.model.dto.RegisterDTO;
 import com.qrdsn.fullstackbackend.model.dto.UserDTO;
+import com.qrdsn.fullstackbackend.service.AuthenticationService;
 import com.qrdsn.fullstackbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +17,12 @@ import java.util.List;
 @RequestMapping("api/user")
 public class UserController {
     private final UserService userService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, AuthenticationService authenticationService){
         this.userService = userService;
+        this.authenticationService = authenticationService;
     }
 
     //  Insert user
@@ -37,20 +43,40 @@ public class UserController {
 
 
     //  Get user information with id
-    @GetMapping("{id}")
-    public ResponseEntity<UserDTO> getById(@PathVariable Long id){
+    @GetMapping("/all")
+    public ResponseEntity<UserDTO> getById(@RequestParam Long id){
         return ResponseEntity.ok(userService.findById(id));
     }
 
     //  Update user information
     @PutMapping
-    public ResponseEntity<UserDTO> update(@RequestBody UserDTO newUser){
+    public ResponseEntity<UserDTO> update(@RequestBody EditUserDTO newUser){
         return ResponseEntity.ok(userService.update(newUser));
     }
 
     //  Delete the user with id
-    @DeleteMapping("{id}")
-    public ResponseEntity<UserDTO> delete(@PathVariable Long id){
+    @DeleteMapping
+    public ResponseEntity<UserDTO> delete(@RequestParam Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.delete(id));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<RegisterDTO> register(@RequestBody RegisterDTO registerDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.register(registerDTO));
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<UserDTO> changePassword(@RequestParam Long id, @RequestParam String token) {
+        return ResponseEntity.status(HttpStatus.OK).body(authenticationService.verify(token, id));
+    }
+
+    @PutMapping("/changePassword")
+    public ResponseEntity<UserDTO> changePassword(@RequestBody EditUserDTO userDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(authenticationService.changePassword(userDTO));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(authenticationService.login(loginDTO));
     }
 }

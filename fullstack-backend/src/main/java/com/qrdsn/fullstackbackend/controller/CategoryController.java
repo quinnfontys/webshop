@@ -1,7 +1,7 @@
 package com.qrdsn.fullstackbackend.controller;
 
 import com.qrdsn.fullstackbackend.model.dto.CategoryDTO;
-import com.qrdsn.fullstackbackend.service.CategoryService;
+import com.qrdsn.fullstackbackend.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,23 +12,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController {
-    private final CategoryService categoryService;
+    private final InventoryService inventoryService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService){
-        this.categoryService = categoryService;
+    public CategoryController(InventoryService inventoryService){
+        this.inventoryService = inventoryService;
     }
 
     //  Insert category
     @PostMapping
     public ResponseEntity<CategoryDTO> create(@RequestBody CategoryDTO newCategory){
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.create(newCategory));
+        return ResponseEntity.status(HttpStatus.CREATED).body(inventoryService.createCategory(newCategory));
     }
 
     //  Get all categories
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<CategoryDTO>> findAll(){
-        List<CategoryDTO> categoryViewModelList = categoryService.findAll();
+        List<CategoryDTO> categoryViewModelList = inventoryService.findAllCategories();
         if (categoryViewModelList != null ) {
             return ResponseEntity.ok(categoryViewModelList);
         }
@@ -37,20 +37,20 @@ public class CategoryController {
 
 
     //  Get category information with id
-    @GetMapping("{id}")
-    public ResponseEntity<CategoryDTO> getById(@PathVariable Long id){
-        return ResponseEntity.ok(categoryService.findById(id));
+    @GetMapping
+    public ResponseEntity<CategoryDTO> getById(@RequestParam Long id){
+        return ResponseEntity.ok(inventoryService.findCategory(id));
     }
 
     //  Update category information
     @PutMapping
     public ResponseEntity<CategoryDTO> update(@RequestBody CategoryDTO newCategory){
-        return ResponseEntity.ok(categoryService.update(newCategory));
+        return ResponseEntity.ok(inventoryService.updateCategory(newCategory));
     }
 
     //  Delete the category with id
-    @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.delete(id));
+    @DeleteMapping
+    public ResponseEntity<CategoryDTO> delete(@RequestParam Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(inventoryService.deleteCategory(id));
     }
 }

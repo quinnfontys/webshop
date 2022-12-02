@@ -8,4 +8,5 @@ import lombok.Setter;
 public class CategoryDTO extends DTO {
     Long id;
     String name;
+    String description;
 }

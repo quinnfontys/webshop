@@ -1,7 +1,7 @@
 package com.qrdsn.fullstackbackend.controller;
 
 import com.qrdsn.fullstackbackend.model.dto.CategoryDTO;
-import com.qrdsn.fullstackbackend.service.CategoryService;
+import com.qrdsn.fullstackbackend.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,12 +9,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +23,7 @@ class CategoryControllerTest {
     @InjectMocks
     CategoryController categoryController;
     @Mock
-    CategoryService categoryService;
+    InventoryService inventoryService;
 
     List<CategoryDTO> categoryDTOList = new ArrayList<CategoryDTO>();
     @BeforeEach
@@ -47,7 +47,7 @@ class CategoryControllerTest {
         category.setId(1L);
         category.setName("Oranges");
 
-        when(categoryService.create(any(CategoryDTO.class))).thenReturn(category);
+        when(inventoryService.createCategory(any(CategoryDTO.class))).thenReturn(category);
 
         ResponseEntity<CategoryDTO> result = categoryController.create(category);
 
@@ -57,7 +57,7 @@ class CategoryControllerTest {
 
     @Test
     void findAll() {
-        when(categoryService.findAll()).thenReturn(categoryDTOList);
+        when(inventoryService.findAllCategories()).thenReturn(categoryDTOList);
 
         ResponseEntity<List<CategoryDTO>> result = categoryController.findAll();
 
@@ -69,7 +69,7 @@ class CategoryControllerTest {
 
     @Test
     void getById() {
-        when(categoryService.findById(any(Long.class))).thenReturn(categoryDTOList.get(0));
+        when(inventoryService.findCategory(any(Long.class))).thenReturn(categoryDTOList.get(0));
 
         ResponseEntity<CategoryDTO> result = categoryController.getById(1L);
 
@@ -84,7 +84,7 @@ class CategoryControllerTest {
         category.setId(1L);
         category.setName("Oranges");
 
-        when(categoryService.update(any(CategoryDTO.class))).thenReturn(category);
+        when(inventoryService.updateCategory(any(CategoryDTO.class))).thenReturn(category);
 
         ResponseEntity<CategoryDTO> result = categoryController.update(category);
 
@@ -94,7 +94,7 @@ class CategoryControllerTest {
 
     @Test
     void delete() {
-        when(categoryService.delete(any(Long.class))).thenReturn(categoryDTOList.get(0));
+        when(inventoryService.deleteCategory(any(Long.class))).thenReturn(categoryDTOList.get(0));
 
         ResponseEntity<CategoryDTO> result = categoryController.delete(1L);
 

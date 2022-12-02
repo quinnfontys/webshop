@@ -1,7 +1,7 @@
 package com.qrdsn.fullstackbackend.controller;
 
 import com.qrdsn.fullstackbackend.model.dto.ProductDTO;
-import com.qrdsn.fullstackbackend.service.ProductService;
+import com.qrdsn.fullstackbackend.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +23,7 @@ class ProductControllerTest {
     ProductController productController;
 
     @Mock
-    ProductService productService;
+    InventoryService inventoryService;
 
     List<ProductDTO> productDTOList = new ArrayList<ProductDTO>();
     @BeforeEach
@@ -48,7 +47,7 @@ class ProductControllerTest {
         product.setId(1L);
         product.setName("Cavendish");
 
-        when(productService.create(any(ProductDTO.class))).thenReturn(product);
+        when(inventoryService.createProduct(any(ProductDTO.class))).thenReturn(product);
 
         ResponseEntity<ProductDTO> result = productController.create(product);
 
@@ -58,7 +57,7 @@ class ProductControllerTest {
 
     @Test
     void findAll() {
-        when(productService.findAll()).thenReturn(productDTOList);
+        when(inventoryService.findAllProducts()).thenReturn(productDTOList);
 
         ResponseEntity<List<ProductDTO>> result = productController.findAll();
 
@@ -70,7 +69,7 @@ class ProductControllerTest {
 
     @Test
     void getById() {
-        when(productService.findById(any(Long.class))).thenReturn(productDTOList.get(0));
+        when(inventoryService.findProduct(any(Long.class))).thenReturn(productDTOList.get(0));
 
         ResponseEntity<ProductDTO> result = productController.getById(1L);
 
@@ -85,7 +84,7 @@ class ProductControllerTest {
         product.setId(1L);
         product.setName("Cavendish");
 
-        when(productService.update(any(ProductDTO.class))).thenReturn(product);
+        when(inventoryService.updateProduct(any(ProductDTO.class))).thenReturn(product);
 
         ResponseEntity<ProductDTO> result = productController.update(product);
 
@@ -95,7 +94,7 @@ class ProductControllerTest {
 
     @Test
     void delete() {
-        when(productService.delete(any(Long.class))).thenReturn(productDTOList.get(0));
+        when(inventoryService.deleteProduct(any(Long.class))).thenReturn(productDTOList.get(0));
 
         ResponseEntity<ProductDTO> result = productController.delete(1L);
 

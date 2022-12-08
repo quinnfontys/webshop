@@ -1,7 +1,7 @@
 const NotFound = () => {
     return ( 
         <div>
-            404 not found :(
+            This page doesn't exist :(
         </div>
      );
 }

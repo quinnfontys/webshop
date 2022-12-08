@@ -1,0 +1,24 @@
+.list {
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.list > Table {
+  /* border-radius: 10px;
+  border: 2px solid black;
+  background-color: red; */
+  border-collapse: separate;
+  border: solid black 1px;
+  border-radius: 6px;
+  table-layout: fixed;
+}
+
+.list Table td, th {
+  border: none;
+}
+
+.list table td {
+  overflow: hidden;
+  white-space: nowrap;
+}

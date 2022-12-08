@@ -11,7 +11,7 @@ const Login = () => {
     const user = {email, password};
 
     const useSubmit = (e) => {
-        response = usePost(e, url.user + "/login", user);
+        const response = usePost(e, url.user + "/login", user);
 
         if (response?.status === 201) {
             setSuccessMsg('Check your mail inbox!');

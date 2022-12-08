@@ -20,8 +20,9 @@ public class Product {
     private String name;
     @Column(columnDefinition = "TEXT")
     private String description;
-    private String image_file;
+    private String imageFile;
     private Float price;
+    private Integer stock;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<CartProduct> cartProducts;

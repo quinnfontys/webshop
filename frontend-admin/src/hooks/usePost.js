@@ -1,11 +1,11 @@
-import axios from "../api/axios";
+import axios from '../api/axios';
 
 const usePost = async (e, url, data) => {
     try {
         e.preventDefault();
         
+        console.log(JSON.stringify(data));
         console.log(data);
-        console.log(url);
         
         const response = await axios.post(url, data, 
         {
@@ -15,17 +15,18 @@ const usePost = async (e, url, data) => {
         console.log(response?.data);
         
         if (response?.status === 200) {
-            console.log('successfully added data');
+            console.log('Successfully added data');
         }   
     } catch (err) {
+        console.log(err);
         if (!err?.response) {
             console.log('No server response');
         } else if (err.response?.status === 400) {
             console.log('Unathorized');
         } else {
-            console.log('failed');
+            console.log('Failed');
         }
     }
 }
-
+ 
 export default usePost;

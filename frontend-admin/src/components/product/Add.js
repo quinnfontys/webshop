@@ -7,7 +7,7 @@ import useGet from "../../hooks/useGet";
 import usePost from "../../hooks/usePost"
 
 
-const AddProduct = () => {
+const AddProduct = ({hide}) => {
     const { data : categories } = useGet(url.category + "/all");
     const [multiSelections, setMultiSelections] = useState(categories);
     
@@ -27,28 +27,33 @@ const AddProduct = () => {
         if (response?.status === 201) {
             console.log('success');
           }
+          
+        hide()
     }
 
 
-    return ( 
+    return (
         <Form onSubmit={HandleSubmit}>
-            <Form.Group className="mb-3">
+            {/* <Button variant="secondary" onClick={hide()}>
+                HIDE
+            </Button> */}
+            <Form.Group className="mb-3" id="formName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control required type="text" placeholder="Product name" onChange={(e) => setName(e.target.value)}/>
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" id="formDescription">
                 <Form.Label>Description</Form.Label>
                 <Form.Control required as="textarea" placeholder="Product description" rows={3} onChange={(e) => setDescription(e.target.value)}/>
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" id="formImage">
                 <Form.Label>Image</Form.Label>
                 <Form.Control required type="text" placeholder="Product image file name" onChange={(e) => setImageFile(e.target.value)}/>
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" id="formPrice">
                 <Form.Label>Price</Form.Label>
                 <Form.Control required type="number" placeholder="Product price" min="0" step="0.01" onChange={(e) => setPrice(e.target.value)}/>
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" id="formCategory">
                 <Form.Label>Category</Form.Label>
                 <Typeahead
                     id="basic-typeahead-multiple"
@@ -59,11 +64,11 @@ const AddProduct = () => {
                     selected={multiSelections}
                 />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" id="formStock">
                 <Form.Label>Stock</Form.Label>
                 <Form.Control required type="number" placeholder="Product stock" min="0" step="1" onChange={(e) => setStock(e.target.value)}/>
             </Form.Group>
-            <Form.Group>
+            <Form.Group id="formSubmit">
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

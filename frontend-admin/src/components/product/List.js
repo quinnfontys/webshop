@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Button, Table } from "react-bootstrap";
 import url from "../../api/url";
 import useGet from "../../hooks/useGet"; 
@@ -11,24 +11,27 @@ const ProductList = () => {
     const [show, setShow] = useState(false);
     const [component, setComponent] = useState(null);
     const [heading, setHeading] = useState(null);
+    const [products, setProducts] = useState(null);
 
-    // const [id, setId] = useState(null);
-    // const [name, setName] = useState(null);
-    // const [description, setDescription] = useState(null);
-    // const [imageFile, setImageFile] = useState(null);
-    // const [price, setPrice] = useState(null);
-    // const [stock, setStock] = useState(null);
-    // const [category, setCategory] = useState(null);
+    useEffect(() => {
+        setProducts(data);
+    }, [data]);
+    
 
+    function hideAndRefresh(newData){
+        setShow(false);
+        setProducts(newData);
+        // window.location.reload(false);
+    }
 
     function loadAdd() {
-        setComponent(<Add/>);
+        setComponent(<Add hide={event => hideAndRefresh}/>);
         setHeading("Add Product");
         setShow(true);
     }
 
-    function loadEdit(id) {
-        setComponent(<Edit id={id} />);
+    function loadEdit(product) {
+        setComponent(<Edit product={product} hide={event => hideAndRefresh}/>);
         setHeading("Edit Product");
         setShow(true);
     }
@@ -47,7 +50,7 @@ const ProductList = () => {
     return ( 
         <div className="list">
             <div>
-                <Button onClick={() => loadAdd()}>Add product</Button>
+                <Button onClick={() => loadAdd()}>Add Product</Button>
             </div>
             <br/>
 
@@ -64,7 +67,7 @@ const ProductList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((product) => (
+                    {products.map((product) => (
                         <tr key={product.id}>{/*onClick="something"*/}
                             <th scope="row">{product.id}</th>
                             <td>{product.name}</td>
@@ -73,7 +76,7 @@ const ProductList = () => {
                             <td>{product.category.name}</td>
                             <td>{product.stock}</td>
                             <td>
-                                <i onClick={() => loadEdit(product.id)} className="bi bi-gear-fill"></i>
+                                <i onClick={() => loadEdit(product)} className="bi bi-gear-fill"></i>
                                 <i onClick={() => loadDelete(product.id)} className="bi bi-trash-fill"></i>
                             </td>
                         </tr>

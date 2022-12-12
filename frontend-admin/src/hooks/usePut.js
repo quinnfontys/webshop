@@ -1,32 +1,33 @@
 import axios from '../api/axios';
 
 const usePut = async (e, url, data) => {
-    try {
-        e.preventDefault();
-        
-        console.log(JSON.stringify(data));
-        console.log(data);
-        
-        const response = await axios.put(url, data, 
-        {
-            headers: { 'Content-Type': 'application/JSON' }
-        });
-        
-        console.log(response?.data);
-        
-        if (response?.status === 200) {
-            console.log('Successfully updated data');
-        }   
-    } catch (err) {
-        console.log(err);
-        if (!err?.response) {
-            console.log('No server response');
-        } else if (err.response?.status === 400) {
-            console.log('Unathorized');
-        } else {
-            console.log('Failed');
+    console.log(" use put called");
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
+    const response = null;
+    const putData = () => {
+        try {
+            e.preventDefault()
+            
+            // console.log(JSON.stringify(data));
+            // console.log(data);
+            
+            // const response = await axios.put(url, data);
+             axios.put(url, data);
+            console.log(response);
+                
+            if (response?.status === 200) {
+                // setError(null);
+                // console.log('Successfully updated data');
+            }   
+        } catch (err) {
+            // setError(err.message);
+        } finally {
+            // setLoading(false);
         }
-    }
+    };
+    await putData();  
+
 }
  
 export default usePut;

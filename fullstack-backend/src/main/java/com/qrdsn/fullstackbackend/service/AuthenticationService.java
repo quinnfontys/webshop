@@ -102,8 +102,9 @@ public class AuthenticationService {
 
         StringBuilder string = new StringBuilder();
 
+        Random random = new Random();
+
         for(int i = 0; i < length; i++) {
-            Random random = new Random();
             int index = random.nextInt(ALPHANUMERIC.length);
 
             string.append(ALPHANUMERIC[index]);

@@ -1,6 +1,6 @@
 import { Form, Button } from "react-bootstrap";
-import { Typeahead } from 'react-bootstrap-typeahead';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
+// import { Typeahead } from 'react-bootstrap-typeahead';
+// import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { useState } from 'react';
 import url from "../../api/url";
 import useGet from "../../hooks/useGet"; 
@@ -9,25 +9,25 @@ import usePost from "../../hooks/usePost"
 
 const AddProduct = ({hide}) => {
     const { data : categories } = useGet(url.category + "/all");
-    const [multiSelections, setMultiSelections] = useState(categories);
+    // const [multiSelections, setMultiSelections] = useState(categories);
     
     const [name, setName] = useState(null);
     const [description, setDescription] = useState(null);
     const [imageFile, setImageFile] = useState(null);
     const [price, setPrice] = useState(null);
+    const [categoryId, setCategoryId] = useState(null);
     const [stock, setStock] = useState(null);
     
 
     const HandleSubmit = (e) => {
-        console.log(multiSelections);
-        const data = { name, description, imageFile, price, stock, "category" : {"id" : multiSelections[0].id} };
+        const data = { name, description, imageFile, price, stock, "category" : {"id" : categoryId} };
         console.log(data);
         const response = usePost(e, url.product, data);
 
         if (response?.status === 201) {
             console.log('success');
           }
-          
+
         hide()
     }
 
@@ -55,14 +55,19 @@ const AddProduct = ({hide}) => {
             </Form.Group>
             <Form.Group className="mb-3" id="formCategory">
                 <Form.Label>Category</Form.Label>
-                <Typeahead
+                {/* <Typeahead
                     id="basic-typeahead-multiple"
                     labelKey="name"
                     onChange={setMultiSelections}
                     options={categories}
                     placeholder="Product category"
                     selected={multiSelections}
-                />
+                /> */}
+                    <Form.Select defaultValue={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        ))}
+                    </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" id="formStock">
                 <Form.Label>Stock</Form.Label>

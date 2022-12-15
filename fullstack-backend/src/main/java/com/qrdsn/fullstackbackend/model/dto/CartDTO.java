@@ -13,14 +13,4 @@ public class CartDTO {
     UserDTO user;
     @JsonManagedReference
     private Set<CartProductDTO> cartProducts;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "team_member",
-            joinColumns = {
-                    @JoinColumn(name = "team_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "user_id", referencedColumnName = "id")
-            })
-    public List<User> user;
 }

@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  ws-api:
+    container_name: ws-api
+    image: quinnfontys/backend
+    ports:
+      - "8090:8090"
+    depends_on:
+      - mysqldb
+
+
+  webshop:
+    container_name: webshop
+    image: quinnfontys/frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ws-api
+
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: securepassword
+    volumes:
+      - database-volume:/var/lib/mysql
+
+
+volumes:
+  database-volume:

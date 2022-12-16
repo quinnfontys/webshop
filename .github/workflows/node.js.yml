@@ -25,5 +25,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-      working-directory: fullstack-backend
     - run: npm test
+      working-directory: fullstack-front

@@ -6,16 +6,12 @@ on:
 
 jobs:
   upload_img:
-
-
-
-    runs-on: ubuntu-latest
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: 'fullstack-front'
     steps:
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       
       - name: Log in to Docker Hub
         env:
@@ -24,8 +20,10 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the Docker image
         run: docker build -t quinnfontys/frontend .
-      -name: Push to Docker
+      - name: Push to Docker
         run: docker push ${{secrets.DOCKER_USER}}/frontend:lates
+
+
 
 
 

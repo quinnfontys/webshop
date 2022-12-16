@@ -1,4 +1,4 @@
-name: Create and Publish frontend webshop image
+name: frontend image publish
 
 on:
   push:
@@ -9,34 +9,13 @@ jobs:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    runs-on: ubuntu-latest
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: 'fullstack-front'
     steps:
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       
       - name: Log in to Docker Hub
         env:

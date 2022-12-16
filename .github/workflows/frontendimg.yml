@@ -5,7 +5,32 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build: 
+  upload_img:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,4 +46,28 @@ jobs:
       - name: Build the Docker image
         run: docker build -t quinnfontys/frontend .
       -name: Push to Docker
-        run: docker push ${{secrets.DOCKER_USER}}/frontend:latest
+        run: docker push ${{secrets.DOCKER_USER}}/frontend:lates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

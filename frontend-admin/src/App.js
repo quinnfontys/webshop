@@ -6,6 +6,7 @@ import './App.css';
 import Navbar from './components/Navbar'
 import ProductList from './components/product/List'
 import CategoryList from './components/category/List'
+import Chatroom from "./components/Chatroom";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/products" element={<ProductList/>}/>
           <Route path="/categories" element={<CategoryList/>}/>
+          <Route path="/chat" element={<Chatroom/>}/>
         </Routes>
     </div>
   );

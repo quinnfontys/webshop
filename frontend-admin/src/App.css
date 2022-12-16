@@ -1,3 +1,5 @@
+/*Product and Category list home page*/
+
 .list {
   margin-top: 10px;
   margin-right: 20px;
@@ -21,4 +23,15 @@
 .list table td {
   overflow: hidden;
   white-space: nowrap;
+}
+
+
+/* Chat page */
+.message {
+  border-color: blue;
+  border: 4px;
+}
+
+.message-name {
+  background-color: gray;
 }

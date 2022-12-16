@@ -1,4 +1,4 @@
-import axios from '../api/axios';
+// import axios from '../api/axios';
 
 const usePost = async (e, url, data) => {
     // try {

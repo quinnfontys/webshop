@@ -10,6 +10,7 @@ const Navigationbar = () => {
                 <Nav className="me-auto">
                     <Link className="nav-link" to="/products">Products</Link>
                     <Link className="nav-link" to="/categories">Categories</Link>
+                    <Link className="nav-link" to="/chat">Chat for some peculiar reason</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

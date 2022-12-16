@@ -19,7 +19,7 @@ const ProductCategory = () => {
                     <div className="card-body">
                         <h5 className="card-title">{product.name}  {product.price}</h5>
                     </div>
-                    <img src={require(`../images/${product.image_file}`)} className="card-img-top" alt="..."/>
+                    <img src={require(`../images/${product.imageFile}`)} className="card-img-top" alt="..."/>
                     <div className="card-body">
                         <p className="card-text">{product.description}</p>
                         <button type="button" className="btn btn-primary"><i className="bi bi-cart-plus"></i></button>

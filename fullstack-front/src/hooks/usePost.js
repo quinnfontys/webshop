@@ -10,7 +10,6 @@ const usePost = async (e, url, data) => {
         const response = await axios.post(url, data, 
         {
             headers: { 'Content-Type': 'application/JSON' }
-            // withCredentials: false //?
         });
         
         console.log(response?.data);

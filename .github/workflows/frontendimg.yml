@@ -1,4 +1,4 @@
-name: frontend image publish
+name: Frontend image publish
 
 on:
   push:

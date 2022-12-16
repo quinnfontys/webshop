@@ -1,4 +1,4 @@
-name: backend image publish
+name: Backend image publish
 
 on:
   push:
@@ -18,11 +18,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          
+
       - name: Log in to Docker Hub
         run: docker login -u=quinnfontys -p="${{ secrets.DOCKER_PASSWORD }}"    
-      - name: Build the Docker image
+      - name: Create Package
         run: mvn clean package
+      - name: Build the Docker image
         run: docker build -t quinnfontys/backend .
       - name: Push to Docker
         run: docker push quinnfontys/frontend:latest

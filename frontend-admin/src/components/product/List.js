@@ -68,7 +68,7 @@ const ProductList = () => {
                 </thead>
                 <tbody>
                     {products.map((product) => (
-                        <tr key={product.id}>{/*onClick="something"*/}
+                        <tr id="column" key={product.id}>{/*onClick="something"*/}
                             <th scope="row">{product.id}</th>
                             <td>{product.name}</td>
                             <td>{product.description}</td>

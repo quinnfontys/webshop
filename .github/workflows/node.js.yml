@@ -9,7 +9,9 @@ on:
 
 jobs:
   build:
-
+    defaults:
+      run:
+        working-directory: fullstack-backend
     runs-on: ubuntu-latest
 
     strategy:

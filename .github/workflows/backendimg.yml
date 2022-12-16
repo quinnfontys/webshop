@@ -26,4 +26,4 @@ jobs:
       - name: Build the Docker image
         run: docker build -t quinnfontys/backend .
       - name: Push to Docker
-        run: docker push quinnfontys/frontend:latest
+        run: docker push quinnfontys/backend:latest

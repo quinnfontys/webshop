@@ -15,7 +15,7 @@ jobs:
       run:
         working-directory: 'fullstack-front'
     steps:
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       
       - name: Log in to Docker Hub
         env:

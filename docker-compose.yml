@@ -8,6 +8,8 @@ services:
       - "8090:8090"
     depends_on:
       - mysqldb
+    environment:
+      - SPRING.DATASOURCE_URL=jdbc:mysql://mysqldb:3306/db
 
   webshop:
     container_name: webshop

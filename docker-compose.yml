@@ -9,12 +9,19 @@ services:
     depends_on:
       - mysqldb
 
-
   webshop:
     container_name: webshop
     image: quinnfontys/frontend
     ports:
-      - "3000:3000"
+      - "3001:3001"
+    depends_on:
+      - ws-api
+
+  ws-admin:
+    container_name: ws-admin
+    image: quinnfontys/frontendadmin
+    ports:
+      - "3002:3002"
     depends_on:
       - ws-api
 

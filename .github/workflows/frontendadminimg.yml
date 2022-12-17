@@ -1,4 +1,4 @@
-name: Frontend image publish
+﻿name: Frontend admin image publish
 
 on:
   push:
@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 'fullstack-front'
+        working-directory: 'frontend-admin'
     steps:
       - uses: actions/checkout@v3
       
       - name: Log in to Docker Hub
         run: docker login -u=quinnfontys -p="${{ secrets.DOCKER_PASSWORD }}"
       - name: Build the Docker image
-        run: docker build -t quinnfontys/frontend .
+        run: docker build -t quinnfontys/frontendadmin .
       - name: Push to Docker
-        run: docker push quinnfontys/frontend:latest
+        run: docker push quinnfontys/frontendadmin:latest

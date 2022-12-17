@@ -1,4 +1,4 @@
-version: '3.7'
+version: '0.1'
 
 services:
   ws-api:
@@ -9,7 +9,7 @@ services:
     depends_on:
       - mysqldb
     environment:
-      - SPRING.DATASOURCE_URL=jdbc:mysql://mysqldb:3306/db
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/db
 
   webshop:
     container_name: webshop

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import url from '../api/url';
-import usePost from '../hooks/usePost'; 
+import { Link } from 'react-router-dom';
+import axios from '../api/axios';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,11 +12,21 @@ const Login = () => {
     const user = {email, password};
 
     const useSubmit = (e) => {
-        const response = usePost(e, url.user + "/login", user);
-
-        if (response?.status === 201) {
-            setSuccessMsg('Check your mail inbox!');
-          }
+        const postData = async () => {
+            try {
+                e.preventDefault();
+                const response = await axios.post(url.user + "/login", user);
+                console.log(response);
+                console.log(response?.status);
+                if (response?.status === 201){
+                    setSuccessMsg("successfully logged in");
+                }
+            } catch (err) {
+                setErrMsg(err.message);
+                console.log(err.message);
+            }
+        };
+        postData();
     }
 
     return (
@@ -32,7 +43,7 @@ const Login = () => {
                         required
                         className="form-control"
                         id="inputName"
-                        placeholder="e.g. quinnfontys@gmail.com"
+                        placeholder="Test@example.com"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
@@ -42,14 +53,15 @@ const Login = () => {
                         type="text" 
                         className="form-control" 
                         id="inputPassword"
-                        placeholder="e.g. password123"
+                        placeholder="Test"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
                 <div className="col-12">
-                    <button onClick={useSubmit} type="submit" className="btn btn-primary">Add product</button>
+                    <button onClick={useSubmit} type="submit" className="btn btn-primary">Log in</button>
                 </div>
             </form>
+            <br/><Link className="navbar-brand" to="/register">Register instead</Link>
         </section>
     )
 }

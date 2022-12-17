@@ -22,8 +22,10 @@ public class FullstackBackendApplication {
 		return args -> {
 			//Seed users
 			List<User> users = new ArrayList<>();
-			users.add(new User(1L, "Test@Example.com", "Test", (byte)1));
-			users.add(new User(2L, "quinnfontys@gmail.com", "password", (byte)0));
+			//password == "Test"
+			users.add(new User(1L, "Test@Example.com", "$2a$10$CchgbEpS22Puot3hhqHYMupD6z74tG7tihutyK02eCswUstCDvu1C", (byte)1));
+			//password == "password"
+			users.add(new User(2L, "quinnfontys@gmail.com", "$2a$10$kMXIIK5SrsZlRHzZKKxA6OyjabbLurSxIVdhwzW/RNvV.jNSEeR1e", (byte)0));
 
 			for (User user : users) {
 				userRepository.save(user);

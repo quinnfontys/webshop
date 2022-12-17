@@ -50,18 +50,11 @@ public class AuthenticationService {
         user.setRole((byte)1);
         User newUser = userRepository.save(user);
 
-        String link = createLink(token, newUser.getId());
+        String link = createLink(token, newUser.getEmail());
         System.out.println(link);
         mailService.sendVerifyMail(user.getEmail(), link);
 
         return modelMapper.map(user, RegisterDTO.class);
-    }
-
-    public UserDTO verify(String token, Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new NotFoundException("Could not find user " + id));
-
-        return login(token, user);
     }
 
     public UserDTO changePassword(EditUserDTO userDTO) {
@@ -81,20 +74,17 @@ public class AuthenticationService {
         if (user == null) {
             throw new NotFoundException(String.format("User with email: %s not found", loginDTO.getEmail()));
         }
-        return login(loginDTO.getPassword(), user);
-    }
 
-    private UserDTO login(String password, User user) {
-        if(encoder.matches(password, user.getPassword())) {
+        if(encoder.matches(loginDTO.getPassword(), user.getPassword())) {
             //successfully logged in
             return modelMapper.map(userRepository.save(modelMapper.map(user, User.class)), UserDTO.class);
         }
         throw new NotFoundException("Login failed");
     }
 
-    private String createLink(String token, Long userId) {
-        String domain = "http://localhost:8090/api/user/verify";
-        return (domain + "?id=" + userId + "&token=" + token);
+    private String createLink(String token, String email) {
+        String domain = "http://localhost:3001/verify";
+        return (domain + "?email=" + email + "&token=" + token);
     }
 
     private String randomString(int length) {

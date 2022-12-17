@@ -65,11 +65,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.register(registerDTO));
     }
 
-    @PostMapping("/verify")
-    public ResponseEntity<UserDTO> changePassword(@RequestParam Long id, @RequestParam String token) {
-        return ResponseEntity.status(HttpStatus.OK).body(authenticationService.verify(token, id));
-    }
-
     @PutMapping("/changePassword")
     public ResponseEntity<UserDTO> changePassword(@RequestBody EditUserDTO userDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(authenticationService.changePassword(userDTO));

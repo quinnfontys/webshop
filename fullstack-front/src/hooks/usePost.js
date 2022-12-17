@@ -5,7 +5,6 @@ const usePost = async (e, url, data) => {
         e.preventDefault();
         
         console.log(data);
-        console.log(url);
         
         const response = await axios.post(url, data, 
         {
@@ -15,7 +14,7 @@ const usePost = async (e, url, data) => {
         console.log(response?.data);
         
         if (response?.status === 200) {
-            console.log('successfully added data');
+            console.log('success');
         }   
     } catch (err) {
         if (!err?.response) {

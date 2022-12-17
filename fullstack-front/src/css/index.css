@@ -12,3 +12,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.error-msg {
+  color: #5f2120;
+  background-color: #fdeded;
+  border-left: 0.6rem #ef5350 solid;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.success-msg {
+  color: #1e4620;
+  background-color: #edf7ed;
+  border-left: 0.6rem #4caf50 solid;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.offscreen {
+  display: none;
+}

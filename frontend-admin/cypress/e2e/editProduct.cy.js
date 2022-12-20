@@ -1,6 +1,6 @@
 describe('editProduct', () => {
   it('Edits the first available product', () => {
-    cy.visit('http://localhost:3000/products')
+    cy.visit('http://localhost:3002/products')
 
     cy.get('.bi-gear-fill').first().click();
 

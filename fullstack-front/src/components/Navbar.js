@@ -21,8 +21,8 @@ const Navbar = () => {
                             Dropdown
                         </Link>
                         <ul className="dropdown-menu">
-                            <li><Link className="dropdown-item"><i className="bi bi-gear"> Settings</i></Link></li>
-                            <li><Link className="dropdown-item"><i className="bi bi-box-arrow-left"></i> Log out</Link></li>
+                            <li><Link className="dropdown-item" to="/settings"><i className="bi bi-gear"> Settings</i></Link></li>
+                            <li><a className="dropdown-item" href="/logout"><i className="bi bi-box-arrow-left"></i> Log out</a></li>
                         </ul>
                     </li>
                 </ul>

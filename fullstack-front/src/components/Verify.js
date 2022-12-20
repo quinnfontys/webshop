@@ -4,7 +4,7 @@ import axios from "../api/axios";
 
 const Verify = () => {
     const email = (new URLSearchParams(window.location.search)).get("email");
-    const token = (new URLSearchParams(window.location.search)).get("token");
+    const token = (new URLSearchParams(window.location.search)).get("accessCode");
     // const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
     const [authorized, setAuthorized] = useState(false);
@@ -25,6 +25,7 @@ const Verify = () => {
                 if (response?.status === 200){
                     setUser(response.data);
                     setAuthorized(true);
+                    //successfully logged in
                 }
             } catch (err) {
                 setErrMsg(err.message);

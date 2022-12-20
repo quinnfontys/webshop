@@ -1,3 +1,28 @@
 .cart-product-preview {
-    width: max-content;
+    margin-top: 10px;
+}
+
+.cart-product-preview img {
+    max-width: 100px;
+}
+
+.cart-product-preview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.cart-product-image {
+    grid-column: 1 / 2;
+}
+
+.cart-product-title {
+    grid-column: 2 / 3;
+}
+
+.cart-product-price {
+    grid-column: 3 / 4;
+}
+
+.cart-product-quantity {
+    grid-column: 4 / 5;
 }

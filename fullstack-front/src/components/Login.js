@@ -2,12 +2,14 @@ import { useState } from 'react';
 import url from '../api/url';
 import { Link } from 'react-router-dom';
 import axios from '../api/axios';
+import Cookies from 'js-cookie';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
+   
 
     const user = {email, password};
 
@@ -18,8 +20,10 @@ const Login = () => {
                 const response = await axios.post(url.user + "/login", user);
                 console.log(response);
                 console.log(response?.status);
-                if (response?.status === 201){
+                if (response?.status === 200){
                     setSuccessMsg("successfully logged in");
+                    Cookies.set('email', response.data.email, { expires: 7 });
+                    Cookies.set('JWT', response.data.jwsString, { expires: 7 });
                 }
             } catch (err) {
                 setErrMsg(err.message);
@@ -29,6 +33,7 @@ const Login = () => {
         postData();
     }
 
+    if (Cookies.get('JWT') === null) { return <h3>Unauthorized</h3> }
     return (
         <section className="form-section">
             <p className={errMsg ? "error-msg" : "offscreen"} aria-live="assertive">{errMsg}</p>

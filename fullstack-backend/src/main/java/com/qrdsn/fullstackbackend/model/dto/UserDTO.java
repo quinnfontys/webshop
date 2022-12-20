@@ -8,4 +8,5 @@ import lombok.Setter;
 public class UserDTO extends DTO {
     private Long id;
     private String email;
+    private String jwsString;
 }

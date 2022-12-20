@@ -22,11 +22,13 @@ public class AuthenticationService {
 
     private final UserRepository userRepository;
     private final MailService mailService;
+    private final JWTService jwtService;
 
     @Autowired
-    public AuthenticationService(UserRepository userRepository, MailService mailService) {
+    public AuthenticationService(UserRepository userRepository, MailService mailService, JWTService jwtService) {
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.jwtService = jwtService;
     }
 
     ModelMapper modelMapper = new ModelMapper();
@@ -42,26 +44,19 @@ public class AuthenticationService {
             throw new AlreadyExistsException("Email already exists");
         }
 
-        String token = randomString(32);
+        String accessCode = randomString(32);
 
         User user = new User();
-        user.setPassword(encoder.encode(token));
+        user.setPassword(encoder.encode(accessCode));
         user.setEmail(registerDTO.getEmail().toLowerCase());
         user.setRole((byte)1);
         User newUser = userRepository.save(user);
 
-        String link = createLink(token, newUser.getId());
+        String link = createLink(accessCode, newUser.getEmail());
         System.out.println(link);
         mailService.sendVerifyMail(user.getEmail(), link);
 
         return modelMapper.map(user, RegisterDTO.class);
-    }
-
-    public UserDTO verify(String token, Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new NotFoundException("Could not find user " + id));
-
-        return login(token, user);
     }
 
     public UserDTO changePassword(EditUserDTO userDTO) {
@@ -81,20 +76,19 @@ public class AuthenticationService {
         if (user == null) {
             throw new NotFoundException(String.format("User with email: %s not found", loginDTO.getEmail()));
         }
-        return login(loginDTO.getPassword(), user);
-    }
 
-    private UserDTO login(String password, User user) {
-        if(encoder.matches(password, user.getPassword())) {
+        if(encoder.matches(loginDTO.getPassword(), user.getPassword())) {
             //successfully logged in
-            return modelMapper.map(userRepository.save(modelMapper.map(user, User.class)), UserDTO.class);
+            UserDTO userDTOfirst =  modelMapper.map(userRepository.save(user), UserDTO.class);
+            UserDTO userDTOscnd = jwtService.generateJWS(userDTOfirst);
+            return userDTOscnd;
         }
         throw new NotFoundException("Login failed");
     }
 
-    private String createLink(String token, Long userId) {
-        String domain = "http://localhost:8090/api/user/verify";
-        return (domain + "?id=" + userId + "&token=" + token);
+    private String createLink(String accessCode, String email) {
+        String domain = "http://localhost:3001/verify";
+        return (domain + "?email=" + email + "&accessCode=" + accessCode);
     }
 
     private String randomString(int length) {

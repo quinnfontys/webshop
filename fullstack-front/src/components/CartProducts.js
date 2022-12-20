@@ -1,32 +1,36 @@
 import useFetch from "../hooks/useFetch";
 import url from "../api/url";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 
 const Cart = () => {
-    const id = 2;
+    const JWT = Cookies.get('JWT');
 
-    const { data, loading, error } = useFetch(url.cart, {"userId" : id});
+    const { data, loading, error } = useFetch(url.cart, {"jwsString" : JWT});
 
     if (loading) return (<h3>Loading...</h3>);
     if (error != null) return (<h3>{error}</h3>);
     return (
         <div className="cartProducts">
             {data.cartProducts.map((product) => (
-                <div className="product-preview card" key={product.product.id}>
-                    <Link to={`/product/${product.product.id}`}>
-                        <img src={require("../images/apple.png")} className="card-img-top" alt="..."/>
-                        <div className="card-body">
+                <Link to={`/product/${product.product.id}`} key={product.product.id}>
+                    <div className="cart-product-preview card">
+                        <div className="cart-product-image">
+                            <img src={require(`../images/${product.product.imageFile}`)} className="card-img-top" alt="..."/>
+                        </div>
+                        <div className="cart-product-title">
                             <h5 className="card-title">{product.product.name}</h5>
                         </div>
-                        <div className="card-body">
-                            <p className="card-text">{product.product.description}</p>
+                        <div className="cart-product-price">
+                            <p className="card-text">{product.product.price}</p>
                         </div>
-                        <div className="product-quantity">
-                            
+                        <div className="cart-product-quantity">
+                            <p className="card-text">{product.quantity}</p>
                         </div>
-                    </Link>
-                </div>
+                        
+                    </div>
+                </Link>
             ))}
         </div>
     );

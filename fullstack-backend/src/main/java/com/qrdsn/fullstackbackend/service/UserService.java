@@ -7,6 +7,8 @@ import com.qrdsn.fullstackbackend.model.dto.UserDTO;
 import com.qrdsn.fullstackbackend.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -15,6 +17,7 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -38,10 +41,16 @@ public class UserService {
     }
 
     public UserDTO update(EditUserDTO newUser){
-        if (userRepository.existsById(newUser.getId())) {
-            return modelMapper.map(userRepository.save(modelMapper.map(newUser, User.class)), UserDTO.class);
+        EditUserDTO editUserDTO = modelMapper.map(findById(newUser.getId()), EditUserDTO.class);
+        if (newUser.getPassword() != null) {
+            editUserDTO.setPassword(encoder.encode(newUser.getPassword()));
         }
-        throw new NotFoundException("Could not find user " + newUser.getId());
+        if (newUser.getEmail() != null) {
+            //send email as verification or something?
+        }
+        editUserDTO.setRole((byte)1);
+
+        return modelMapper.map(userRepository.save(modelMapper.map(editUserDTO, User.class)), UserDTO.class);
     }
 
     public UserDTO delete(Long id){

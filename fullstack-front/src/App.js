@@ -7,6 +7,8 @@ import Home from "./components/Home";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Verify from "./components/Verify";
+import Logout from "./components/Logout";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/cart" element={<Cart/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/register" element={<Register/>}></Route>
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/logout" element={<Logout />}/>
         </Routes>
       </div>
   );

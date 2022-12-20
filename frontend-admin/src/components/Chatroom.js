@@ -93,7 +93,6 @@ const Chatroom = () => {
                 :
                 <div className="register">
                     <input
-                    id="user-name"
                     name="username"
                     placeholder='Enter the username'
                     value={userData.username}

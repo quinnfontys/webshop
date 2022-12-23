@@ -1,6 +1,6 @@
 describe('addProduct', () => {
   it('Adds a new product', () => {
-    cy.visit('http://localhost:3000/products')
+    cy.visit('http://localhost:3002/products')
 
     cy.contains('Add Product').click();
 
@@ -11,9 +11,16 @@ describe('addProduct', () => {
     cy.get('#formCategory').type('Bananas');
     cy.get('#formStock').type('99');
 
+    cy.intercept({
+      method: 'POST',
+      url: 'http://localhost:8090/api/product',
+    }).as('apiCheck')
+    
     cy.contains('Submit').click();
-
-    // cy.get('#formSubmit').contains('Submit').click();
-
+    
+    cy.wait('@apiCheck').then((interception) => {
+      assert.isNotNull(interception.response.body, "call has data");
+      assert.equal(interception.response.statusCode, 201, "correct http response was given");
+    }) 
   })
 })

@@ -4,10 +4,10 @@ import { Form, Button } from "react-bootstrap";
 import { useState } from 'react';
 import url from "../../api/url";
 import useGet from "../../hooks/useGet"; 
-import usePost from "../../hooks/usePost"
+import axios from "../../api/axios";
 
 
-const AddProduct = ({hide}) => {
+const AddProduct = (props) => {
     const { data : categories } = useGet(url.category + "/all");
     // const [multiSelections, setMultiSelections] = useState(categories);
     
@@ -18,22 +18,25 @@ const AddProduct = ({hide}) => {
     const [categoryId, setCategoryId] = useState(null);
     const [stock, setStock] = useState(null);
     
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault();
+            const response = await axios.post(url.product, { name, description, imageFile, price, stock, "category" : {"id" : 1 } });
+            if (response?.status === 200) {
+                const response = await axios.get(url.product + "/all");
+                if (response?.status === 200){
+                    props.hide(e)(response.data);
 
-    const HandleSubmit = (e) => {
-        const data = { name, description, imageFile, price, stock, "category" : {"id" : categoryId} };
-        console.log(data);
-        const response = usePost(e, url.product, data);
-
-        if (response?.status === 201) {
-            console.log('success');
-          }
-
-        hide()
+                }
+            } 
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 
 
     return (
-        <Form onSubmit={HandleSubmit}>
+        <Form onSubmit={handleSubmit}>
             {/* <Button variant="secondary" onClick={hide()}>
                 HIDE
             </Button> */}

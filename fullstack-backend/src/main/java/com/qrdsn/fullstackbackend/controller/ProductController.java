@@ -1,5 +1,6 @@
 package com.qrdsn.fullstackbackend.controller;
 
+import com.qrdsn.fullstackbackend.model.Product;
 import com.qrdsn.fullstackbackend.model.dto.ProductDTO;
 import com.qrdsn.fullstackbackend.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ProductController {
     //  Insert product
     @PostMapping
     public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO newProduct){
-        return ResponseEntity.status(HttpStatus.CREATED).body(inventoryService.createProduct((newProduct)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(inventoryService.createProduct(newProduct));
     }
 
     //  Get all products
